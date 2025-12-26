@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+  background-color: #0e0f2a;
+  color: #f0f0f5;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #0a0a23;
+  color: #fff;
+  padding: 20px;
+  position: fixed;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #7f5af0;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  width: 100%;
+  padding: 10px;
+  background-color: #1a1a40;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-links li {
+  padding: 10px 5px;
+  margin: 10px 0;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-links li.active,
+.nav-links li:hover {
+  background-color: #1f1f3a;
+  color: #7f5af0;
+  border-radius: 5px;
+}
+
+.bottom-links {
+  position: absolute;
+  bottom: 20px;
+  width: 90%;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.profile img {
+  width: 40px;
+  border-radius: 50%;
+}
+
+.main-content {
+  margin-left: 260px;
+  padding: 20px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.analytics {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.card {
+  flex: 1;
+  min-width: 200px;
+  background-color: #1f1f3a;
+  padding: 20px;
+  border-radius: 10px;
+  color: #fff;
+}
+
+.card.purple {
+  border-left: 5px solid #a259ff;
+}
+
+.card.pink {
+  border-left: 5px solid #ff4d97;
+}
+
+.card.blue {
+  border-left: 5px solid #4cc9f0;
+}
+
+.card.cyan {
+  border-left: 5px solid #00f5d4;
+}
+
+.up {
+  color: #00ff88;
+}
+
+.down {
+  color: #ff4d4d;
+}
+
+.charts {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.chart {
+  flex: 1;
+  background-color: #1f1f3a;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 300px;
+  color: #fff;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border: 10px solid transparent;
+  border-top: 10px solid #7f5af0;
+  border-right: 10px solid #00f5d4;
+  border-bottom: 10px solid #4cc9f0;
+  border-left: 10px solid #ff4d97;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 130px;
+  font-size: 24px;
+  margin: 20px auto;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.dot.purple { background-color: #a259ff; }
+.dot.blue { background-color: #4cc9f0; }
+.dot.cyan { background-color: #00f5d4; }
+
+.flag-icon {
+  font-size: 18px;
+  margin-right: 15px;
+}
+
+.user-name {
+  font-weight: bold;
+  color: #f0f0f5;
+}
+
+    </style>
+
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">Traveler</div>
+        <input type="text" placeholder="Search for..." class="search-box">
+        <ul class="nav-links">
+            <li tabindex="0"> <i class="fa fa-address-book" aria-hidden="true"></i> <a href="/contact/" class="nav-item nav-link{% if request.path == '/contact/' %} active{% endif %}">Contacts</a> </li>
+            <li tabindex="0"> <i class="fa fa-hotel" aria-hidden="true"></i> <a href="/hotel_book_a/" class="nav-item nav-link{% if request.path == '/hotel_book_a/' %} active{% endif %}">Hotel Bookings</a> </li>
+            <li tabindex="0"> <i class="fa fa-building" aria-hidden="true"></i> <a href="/add_hotel/" class="nav-item nav-link{% if request.path == '/add_hotel/' %} active{% endif %}">Hotels</a> </li>
+            <li tabindex="0"> <i class="fa fa-suitcase" aria-hidden="true"></i> <a href="/tour_book_a/" class="nav-item nav-link{% if request.path == '/tour_book_a/' %} active{% endif %}">Tour Bookings</a> </li>
+            <li tabindex="0"> <i class="fa fa-folder" aria-hidden="true"></i> <a href="/tour_cat_a/" class="nav-item nav-link{% if request.path == '/tour_cat_a/' %} active{% endif %}">Tour Categories</a> </li>
+            <li tabindex="0"> <i class="fa fa-map" aria-hidden="true"></i> <a href="/tour_admin/" class="nav-item nav-link{% if request.path == '/tour_admin/' %} active{% endif %}">Tours</a> </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="top-bar">
+            <h1>Analytics</h1>
+            <div class="profile-right">
+                <span class="flag-icon"></span>
+                <i class="fa fa-bell"></i>
+                <div class="user-name"></div>
+            </div>
+        </div>
+        <div class="analytics">
+            <div class="card purple"><h3>Tour Booking</h3><p>_ <span class="up">_</span></p></div>
+            <div class="card pink"><h3>Hotel Booking</h3><p>_ <span class="down">_</span></p></div>
+            <div class="card blue"><h3>Users</h3><p>_ <span class="up">_</span></p></div>
+            <div class="card cyan"><h3>Average Revenue</h3><p>_ <span class="up">_</span></p></div>
+        </div>
+        <div class="charts">
+            <div class="chart">
+                <h3>Website Visitors</h3>
+                <div class="circle">150k</div>
+                <ul>
+                    <li><span class="dot purple"></span> Organic - 80%</li>
+                    <li><span class="dot blue"></span> Social - 60%</li>
+                    <li><span class="dot cyan"></span> Direct - 50%</li>
+                </ul>
+            </div>
+            <div class="chart">
+                <h3>Revenue by customer type</h3>
+                <p class="amount">$240.8K <span class="up">+14.8%</span></p>
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

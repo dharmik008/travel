@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tour Catagory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+      /* Reset & base */
+      html, body {
+      height: 100%;
+      margin: 0;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      }
+    /* Sidebar */
+    .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: #1e293b;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+    z-index: 1000;
+    }
+    .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #a78bfa;
+      margin-bottom: 30px;
+      user-select: none;
+      letter-spacing: 1px;
+    }
+    .search-box {
+      width: 100%;
+      padding: 10px 12px;
+      background-color: #334155;
+      border: none;
+      border-radius: 6px;
+      color: #cbd5e1;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+      outline-offset: 2px;
+      transition: background-color 0.3s ease;
+    }
+    .search-box::placeholder {
+      color: #94a3b8;
+    }
+    .search-box:focus {
+      background-color: #475569;
+      color: #f1f5f9;
+    }
+    .nav-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+    .nav-links li {
+      margin-bottom: 15px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+      padding: 8px 12px;
+      user-select: none;
+    }
+    .nav-links li i {
+      min-width: 24px;
+      text-align: center;
+      color: #a5b4fc;
+      font-size: 1.15rem;
+    }
+    .nav-links li a {
+      color: #f1f5f9;
+      text-decoration: none;
+      margin-left: 12px;
+      flex-grow: 1;
+    }
+    .nav-links li.active,
+    .nav-links li:hover {
+      background-color: #475569;
+      color: #a78bfa;
+    }
+    .nav-links li.active i,
+    .nav-links li:hover i {
+      color: #a78bfa;
+    }
+
+    /* Main content area */
+    .main-content {
+      margin-left: 280px;
+      height: 100vh;
+      padding: 40px 50px;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    h2 {
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: #a78bfa;
+    }
+
+    /* Form styling overrides */
+    label.form-label {
+      color: #a5f3fc;
+      font-weight: 600;
+    }
+    .form-control,
+    .form-select,
+    textarea.form-control {
+      background-color: #1e293b;
+      color: #f8fafc;
+      border: 1.5px solid #334155;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    .form-control::placeholder {
+      color: #94a3b8;
+    }
+    .form-control:focus,
+    .form-select:focus,
+    textarea.form-control:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 8px #8b5cf6aa;
+      background-color: #25325c;
+      color: #f1f5f9;
+      outline: none;
+    }
+    small.text-info {
+      color: #60a5fa;
+    }
+
+    /* Submit button */
+    .btn-submit {
+      background: linear-gradient(90deg, #8b5cf6, #06b6d4);
+      border: none;
+      font-weight: 600;
+      padding: 12px 0;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      transition: background 0.4s ease;
+      box-shadow: 0 3px 8px rgba(107, 33, 168, 0.5);
+    }
+    .btn-submit:hover {
+      background: linear-gradient(90deg, #06b6d4, #8b5cf6);
+      box-shadow: 0 4px 12px rgba(38, 172, 225, 0.7);
+    }
+
+    /* Scrollbar styling for sidebar nav */
+    .nav-links::-webkit-scrollbar {
+      width: 6px;
+    }
+    .nav-links::-webkit-scrollbar-thumb {
+      background-color: #64748b;
+      border-radius: 4px;
+    }
+    .nav-links::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 220px;
+        padding: 20px 15px;
+      }
+      .main-content {
+        margin-left: 220px;
+        padding: 30px 25px;
+      }
+    }
+    @media (max-width: 576px) {
+      html, body {
+        overflow: visible;
+      }
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 15px 10px;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        white-space: nowrap;
+        box-shadow: none;
+      }
+      .logo {
+        margin-right: 20px;
+      }
+      .nav-links {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        max-width: 100%;
+      }
+      .nav-links li {
+        margin: 0 10px 0 0;
+        border-radius: 6px;
+        padding: 6px 10px;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px 15px;
+      }
+    }
+    </style>
+</head>
+<body>
+    <aside class="sidebar" role="navigation" aria-label="Main sidebar navigation">
+        <div class="logo">Traveler</div>
+        <input type="search" class="search-box" placeholder="Search for..." aria-label="Search navigation links" />
+        <ul class="nav-links">
+             <li tabindex="0"> <i class="fa fa-address-book" aria-hidden="true"></i> <a href="/contact/" class="nav-item nav-link{% if request.path == '/contact/' %} active{% endif %}">Contacts</a> </li>
+            <li tabindex="0"> <i class="fa fa-hotel" aria-hidden="true"></i> <a href="/hotel_book_a/" class="nav-item nav-link{% if request.path == '/hotel_book_a/' %} active{% endif %}">Hotel Bookings</a> </li>
+            <li tabindex="0"> <i class="fa fa-building" aria-hidden="true"></i> <a href="/add_hotel/" class="nav-item nav-link{% if request.path == '/add_hotel/' %} active{% endif %}">Hotels</a> </li>
+            <li tabindex="0"> <i class="fa fa-suitcase" aria-hidden="true"></i> <a href="/tour_book_a/" class="nav-item nav-link{% if request.path == '/tour_book_a/' %} active{% endif %}">Tour Bookings</a> </li>
+            <li tabindex="0"> <i class="fa fa-folder" aria-hidden="true"></i> <a href="/tour_cat_a/" class="nav-item nav-link{% if request.path == '/tour_cat_a/' %} active{% endif %}">Tour Categories</a> </li>
+            <li tabindex="0"> <i class="fa fa-map" aria-hidden="true"></i> <a href="/tour_admin/" class="nav-item nav-link{% if request.path == '/tour_admin/' %} active{% endif %}">Tours</a> </li>
+        </ul>
+    </aside>
+<main class="main-content" role="main">
+    <h2>Add Tour</h2>
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+
+        <div class="mb-3">
+            <label for="category_name" class="form-label">Category Name:</label>
+            <input type="text" class="form-control" id="category_name" name="category_name" value="{{ou.category_name}}" placeholder="Enter tour category" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Tour Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ou.name}}" placeholder="Enter tour name" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea class="form-control" id="description" name="description" value="{{ou.description}}" rows="3" placeholder="Tour description..." required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image:</label>
+            <input type="file" class="form-control" id="image" name="image" value="{{ou.image}}" accept="image/*" required />
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label for="price" class="form-label">Price:</label>
+                <input type="text" class="form-control" id="price" name="price" value="{{ou.price}}" placeholder="₹ 0.00" required />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="rating" class="form-label">Rating:</label>
+                <input type="number" class="form-control" id="rating" name="rating" value="{{ou.rating}}" min="1" max="5" step="0.1" placeholder="1 to 5" required />
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="duration" class="form-label">Duration:</label>
+                <input type="text" class="form-control" id="duration" name="duration" value="{{ou.duration}}" placeholder="e.g., 2 days 3 nights" required />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="location" class="form-label">Location:</label>
+            <input type="text" class="form-control" id="location" name="location" value="{{ou.location}}" placeholder="Enter tour location" required />
+        </div>
+
+        <button type="submit" class="btn btn-submit w-100 mt-4">Submit Tour</button>
+    </form>
+</main>
+
+</body>
+</html>
