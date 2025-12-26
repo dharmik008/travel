@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Hotel Information</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        button {
+            background-color: #ff6f61; /* Warm color */
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+        button a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        button:hover {
+            background-color: #ff3d00; /* Darker shade on hover */
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        button:active {
+            background-color: #e62e00; /* Slightly darker when clicked */
+            transform: translateY(2px);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+        .hover-effect:hover {
+            color: #ffc107 !important;
+            }
+    </style>
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif; min-height: 100vh; display: flex; flex-direction: column;">
+<!-- Bootstrap Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning" href="#">Traveler</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/about/">About</a></li>\
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/tour/">Tour</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/hotel/">Hotels</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/history/">History</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/blog/">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/contact/">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<!-- Main Content Wrapper -->
+    <div style="flex: 1;">
+        <!-- Hero Section -->
+        <div style="background-image: url('{% static '/images/bg_5.jpg' %}'); background-size: cover; background-position: center; text-align: center; padding: 100px 20px; color: white; position: relative; margin-top: 80px;">
+            <div style="background-color: rgba(0, 0, 0, 0.6); padding: 80px 20px;">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <p style="margin: 0; font-size: 18px;">
+                        <a href="index.html" style="color: #ffc107; text-decoration: none;">Home</a> &gt;
+                        <span style="color: white;">Tour</span>
+                    </p>
+                    <h1 style="margin-top: 20px; font-size: 48px;">Hotels</h1>
+                </div>
+            </div>
+        </div>
+<!-- Hotel Information Section -->
+        <div style="max-width: 1200px; margin: 50px auto; display: flex; flex-wrap: wrap;">
+            <div style="flex: 1; padding: 10px;">
+                <img src="{{o2.image.url}}" alt="Hotel Image" style="width: 100%; border-radius: 8px;">
+            </div>
+            <div style="flex: 1; padding: 10px;">
+                <h2>{{i.name}}</h2>
+                <p><strong>Location:</strong>{{o2.location}}</p>
+                <p><strong>Description:</strong>{{ o2.description }}</p>
+                <p><strong>Amenities:</strong></p>
+                <ul>
+                    <li>Free WiFi</li>
+                    <li>Swimming Pool</li>
+                    <li>Restaurant</li>
+                    <li>Fitness Center</li>
+                    <li>Room Service</li>
+                </ul>
+                <p><strong>Price per Night:</strong>{{o2.price}}</p>
+                <button type="button"><a href="/hotel/">Go Back</a> </button>
+                <button type="button"><a href="/hotel_booking/{{o2.id}}/">Book Now</a> </button>
+            </div>
+        </div>
+    </div>
+<!-- Footer Section -->
+    <footer style="background-color: #1a1a1a; color: white; padding: 50px 20px;">
+        <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; gap: 40px;">
+            <div style="flex: 1 1 220px;">
+                <h3>Traveler</h3>
+                <p>Explore your dream destinations with ease and comfort. Your perfect travel partner.</p>
+                <div style="margin-top: 20px;">
+                    <a href="#" style="margin-right: 10px; color: white;">Twitter</a>
+                    <a href="#" style="margin-right: 10px; color: white;">Facebook</a>
+                    <a href="#" style="color: white;">Instagram</a>
+                </div>
+            </div>
+            <div style="flex: 1 1 180px;">
+                <h4>Information</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: white; text-decoration: none;">About</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Service</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Terms and Conditions</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Become a partner</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Best Price Guarantee</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div style="flex: 1 1 180px;">
+                <h4>Customer Support</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li><a href="#" style="color: white; text-decoration: none;">FAQ</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Payment Option</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Booking Tips</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">How it Works</a></li>
+                    <li><a href="#" style="color: white; text-decoration: none;">Contact Us</a></li>
+                </ul>
+            </div>
+            <div style="flex: 1 1 250px;">
+                <h4>Have a Question?</h4>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;">📍 203 Fake St. Mountain View, Ahmedabad, Gujarat, India</li>
+                    <li style="margin-bottom: 10px;">📞 +91 392 3929 210</li>
+                    <li>✉️ info@yourdomain.com</li>
+                </ul>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px; font-size: 14px;">
+            &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | Made with ❤️ by
+            <a href="https://colorlib.com" target="_blank" style="color: #ffc107; text-decoration: none;">Colorlib</a>
+        </div>
+    </footer>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html>

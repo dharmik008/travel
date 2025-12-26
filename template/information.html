@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Tour Information</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex: 1;
+        }
+        .hover-effect:hover {
+            color: #ffc107 !important;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar Start -->
+<!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-warning" href="#">Traveler</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/about/">About</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/tour/">Tour</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/hotel/">Hotels</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/history /">History</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/blog/">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 text-white hover-effect" href="/contact/">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+<!-- Navbar End -->
+<!-- Main Content -->
+    <main>
+    <!-- Hero Section -->
+    <div class="bg-dark text-white py-5 text-center" style="background-image: url('{% static 'images/bg_3.jpg' %}'); background-size: cover; background-position: center;">
+        <div class="bg-dark bg-opacity-50 py-5">
+            <div class="container">
+                <p><a href="index.html" class="text-warning text-decoration-none">Home</a> > <span class="text-white">Tour</span></p>
+                <h1>Destination</h1>
+            </div>
+        </div>
+    </div>
+      <!-- Tour Info Section -->
+        <div class="container my-5">
+            <div class="row bg-white shadow rounded overflow-hidden">
+                <div class="col-md-5 p-0">
+                    <img src="{{o.image.url}}" class="img-fluid h-100 w-100" style="object-fit: cover;" alt="Image Description">
+                </div>
+                <div class="col-md-7 p-4">
+                    <h2 class="mb-3">{{o.name}}</h2>
+                    <p>{{ o.description }}</p>
+                    <ul class="list-unstyled">
+                        <li><strong>Duration:</strong>{{o.duration}}</li>
+                        <li><strong>Price:</strong>{{o.price}} per person</li>
+                        <li><strong>Includes:</strong> Transport, Hotel, Meals, Sightseeing</li>
+                        <li><strong>Start Date:</strong>{{o.date}}</li>
+                    </ul>
+                    <a href="/tour_booking/{{o.id}}/" class="btn btn-primary mt-3">Book Now</a>
+                    <a href="/tour/" class="btn btn-primary mt-3">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </main>
+<!-- Footer -->
+    <footer class="bg-dark text-white mt-auto py-4">
+        <div class="container">
+            <div class="row text-center text-md-start">
+                <div class="col-md-3 mb-3">
+                    <h5 class="text-warning">Traveler</h5>
+                    <p>Explore your dream destinations with ease and comfort. Your perfect travel partner.</p>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5 class="text-warning">Information</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">About</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Service</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Terms & Conditions</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Become a Partner</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Best Price Guarantee</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Privacy & Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5 class="text-warning">Customer Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Payment Option</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Booking Tips</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">How it works</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <h5 class="text-warning">Have Questions?</h5>
+                    <ul class="list-unstyled">
+                        <li>📍 203 Fake St. Mountain View, Ahmedabad, Gujarat, India</li>
+                        <li>📞 +91 392 3929 210</li>
+                        <li>✉️ info@yourdomain.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center pt-3">
+                <small>&copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | Made with ❤️ by <a href="https://colorlib.com" class="text-warning text-decoration-none" target="_blank">Colorlib</a></small>
+            </div>
+        </div>
+    </footer>
+
+<!-- Bootstrap JS Bundle -->
+<scr  ipt src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

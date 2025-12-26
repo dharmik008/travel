@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tour Booking</title>
+    <link rel="stylesheet" href="{% static 'hotel_booking.css' %}">
+</h ead>
+<body>
+
+<!-- Navbar -->
+<nav>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/tour/">Tour</a></li>
+        <li><a href="/hotel/">Hotels</a></li>
+        <li><a href="/history/">History</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/contact/">Contact</a></li>
+    </ul>
+</nav>
+<!-- Hero Section -->
+<div class="hero-wrap js-fullheight" style="background-image: url('{% static 'images/bg_3.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span><a href="index.html"></a></span> <span></span></p>
+                <h1 class="mb-3 bread">Destination</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form method="post" id="paymentForm" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2>Book Your Tour</h2>
+    <label for="f_name">Username:</label>
+    <input type="text" id="u_name" name="username" required> <br>
+
+    <div class="form-grid">
+        <div class="form-column">
+            <label for="f_name">First Name:</label>
+            <input type="text" id="f_name" name="f_name" required>
+
+            <label for="l_name">Last Name:</label>
+            <input type="text" id="l_name" name="l_name" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="number" id="phone" name="phone" required>
+
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+        </div>
+
+        <div class="form-column">
+
+            <label for="no_of_person">Number of People:</label>
+            <input type="number" id="no_of_person" name="no_person" min="1" required>
+
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" value="{{tb.location}}" required >
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" value="{{tb.price}}" required>
+
+            <label for="price">Total Price:</label>
+            <input type="number" id="t_price" name="t_price" value="{{tb.price}}" required>
+
+            <label for="duration">Duration:</label>
+            <input type="text" id="duration" name="duration" value="{{tb.duration}}" required>
+
+        </div>
+    </div>
+
+
+    <button type="submit" id="pay-button">Book Now</button>
+</form>
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const paymentForm = document.getElementById('paymentForm');
+    const payButton = document.getElementById('pay-button');
+
+    payButton.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Get values from form
+        const f_name = document.querySelector('input[name="f_name"]').value;
+        const l_name = document.querySelector('input[name="l_name"]').value;
+        const phone = document.querySelector('input[name="phone"]').value;
+        const email = document.querySelector('input[name="email"]').value;
+        const destination = document.querySelector('input[name="destination"]').value;
+        const price = document.querySelector('input[name="price"]').value;
+        const no_persons = document.querySelector('input[name="no_person"]').value;
+
+        // Validate required fields
+        if (!f_name || !l_name || !phone || !email || !destination || !price || !no_persons ) {
+            alert("Please fill all required fields.");
+            return;
+        }
+
+        const totalAmount = parseInt(price) * parseInt(no_persons) * 100;
+
+        // Razorpay payment options
+        const options = {
+            key: "rzp_test_ytoQRUzHn3jtXL", // Replace with your Razorpay test/live key
+            amount: totalAmount,
+            currency: "INR",
+            name: "Your Company Name",
+            description: `Booking for ${destination}`,
+            handler: function (response) {
+                alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+                paymentForm.submit(); // Submit the form after successful payment
+            },
+            prefill: {
+                name: f_name + " " + l_name,
+                email: email,
+                contact: phone
+            },
+            theme: {
+                color: "#3399cc"
+            }
+        };
+
+        // Open Razorpay payment modal
+        const rzp = new Razorpay(options);
+        rzp.open();
+    });
+});
+
+</script>
+</body>
+</html>

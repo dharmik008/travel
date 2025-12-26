@@ -1,0 +1,290 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="hero-wrap js-fullheight" style="background-image: url('{% static '/images/bg_5.jpg' %}');">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+				<div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+					<p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Hotel</span></p>
+					<h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Hotels</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <section class="ftco-section ftco-degree-bg">
+		<div class="container">
+			<div class="row">
+<!--				<div class="col-lg-3 sidebar">-->
+<!--					<div class="sidebar-wrap bg-light ftco-animate">-->
+<!--						<h3 class="heading mb-4">Find City</h3>-->
+<!--						<form action="#">-->
+<!--							<div class="fields">-->
+<!--								<div class="form-group">-->
+<!--									<input type="text" class="form-control" placeholder="Destination, City" name="destination">-->
+<!--								</div>-->
+<!--								<div class="form-group">-->
+<!--									<div class="select-wrap one-third">-->
+<!--										<div class="icon"><span class="ion-ios-arrow-down"></span></div>-->
+<!--										<select name="" id="" class="form-control" placeholder="Keyword search">-->
+<!--											<option value="">Select Location</option>-->
+<!--											{% for s in h1 %}-->
+<!--											<option value="{{s.location}}">{{s.location}}</option>-->
+<!--											{% endfor %}-->
+<!--&lt;!&ndash;											<option value="">Berlin Germany</option>&ndash;&gt;-->
+<!--&lt;!&ndash;											<option value="">Lodon United Kingdom</option>&ndash;&gt;-->
+<!--&lt;!&ndash;											<option value="">Paris Italy</option>&ndash;&gt;-->
+<!--										</select>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="form-group">-->
+<!--									<input type="text" id="checkin_date" class="form-control" placeholder="Date from" name="date_form">-->
+<!--								</div>-->
+<!--								<div class="form-group">-->
+<!--									<input type="text" id="checkin_date" class="form-control" placeholder="Date to" name="date_to">-->
+<!--								</div>-->
+
+<!--&lt;!&ndash;								<div class="form-group"><div class="range-slider"><span><input type="number" value="25000" min="0" max="120000"/>	- <input type="number" value="50000" min="0" max="120000"/></span><input value="1000" min="0" max="120000" step="500" type="range"/><input value="50000" min="0" max="120000" step="500" type="range"/></svg></div></div>&ndash;&gt;-->
+
+<!--								<div class="form-group">-->
+<!--									<input type="submit" value="Search" class="btn btn-primary py-3 px-5">-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</form>-->
+<!--					</div>-->
+<!--				</div>-->
+				<div class="col-lg-9">
+					<div class="row">
+						{% for i in h %}
+						<div class="col-md-4 ftco-animate">
+							<div class="destination">
+								<a href="hotel-single.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{i.image.url}}');">
+<!--									<div class="icon d-flex justify-content-center align-items-center">-->
+<!--										<span class="icon-search2"></span>-->
+<!--									</div>-->
+								</a>
+								<div class="text p-3">
+									<div class="d-flex">
+										<div class="one">
+											<h3><a href="/hotel_info/{{i.id}}/">Hotel, {{i.name}}</a></h3>
+											<p class="rating">
+												<span class="stars" style="color:red;font-size:18px;">
+													{% for _ in i.full_stars %}
+														★
+													{% endfor %}
+													{% for _ in i.empty_stars %}
+														 ☆
+													{% endfor %}
+												</span>
+
+<!--												<i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><span>8 Rating</span>-->
+
+											</p>
+										</div>
+										<div class="two">
+											<span class="price per-price">{{i.price}}<br><small>/night</small></span>
+										</div>
+									</div>
+									<p>{{i.description}}</p>
+									<hr>
+									<p class="bottom-area d-flex">
+										<span><i class="icon-map-o"></i> {{i.location}} </span>
+										<span class="ml-auto"><a href="/hotel_booking/">Book Now</a></span>
+									</p>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+
+<!--						<div class="col-md-4 ftco-animate">-->
+<!--							<div class="destination">-->
+<!--								<a href="hotel-single.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{i.image.url}}');">-->
+<!--									<div class="icon d-flex justify-content-center align-items-center">-->
+<!--										<span class="icon-search2"></span>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--								<div class="text p-3">-->
+<!--									<div class="d-flex">-->
+<!--										<div class="one">-->
+<!--											<h3><a href="hotel-single.html">Hotel, Meghalaya</a></h3>-->
+<!--											<p class="rate">-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star-o"></i>-->
+<!--												<span>8 Rating</span>-->
+<!--											</p>-->
+<!--										</div>-->
+<!--										<div class="two">-->
+<!--											<span class="price per-price">$40<br><small>/night</small></span>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<p>For its Spellbinding Natural Beauty abode of clouds</p>-->
+<!--									<hr>-->
+<!--									<p class="bottom-area d-flex">-->
+<!--										<span><i class="icon-map-o"></i> Meghalaya</span>-->
+<!--										<span class="ml-auto"><a href="#">Book Now</a></span>-->
+<!--									</p>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+
+<!--						<div class="col-md-4 ftco-animate">-->
+<!--							<div class="destination">-->
+<!--								<a href="hotel-single.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{i.image.url}}');">-->
+<!--									<div class="icon d-flex justify-content-center align-items-center">-->
+<!--										<span class="icon-search2"></span>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--								<div class="text p-3">-->
+<!--									<div class="d-flex">-->
+<!--										<div class="one">-->
+<!--											<h3><a href="hotel-single.html">Hotel, Agra</a></h3>-->
+<!--											<p class="rate">-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star-o"></i>-->
+<!--												<span>8 Rating</span>-->
+<!--											</p>-->
+<!--										</div>-->
+<!--										<div class="two">-->
+<!--											<span class="price per-price">$40<br><small>/night</small></span>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<p>For its Unprecedented Mughal Grandeur Home to the symbol of love</p>-->
+<!--									<hr>-->
+<!--									<p class="bottom-area d-flex">-->
+<!--										<span><i class="icon-map-o"></i> Miami, Fl</span>-->
+<!--										<span class="ml-auto"><a href="#">Book Now</a></span>-->
+<!--									</p>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+
+<!--						<div class="col-md-4 ftco-animate">-->
+<!--							<div class="destination">-->
+<!--								<a href="hotel-single.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{i.image.url}}');">-->
+<!--									<div class="icon d-flex justify-content-center align-items-center">-->
+<!--										<span class="icon-search2"></span>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--								<div class="text p-3">-->
+<!--									<div class="d-flex">-->
+<!--										<div class="one">-->
+<!--											<h3><a href="hotel-single.html">Hotel, Rann of Kutch</a></h3>-->
+<!--											<p class="rate">-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star-o"></i>-->
+<!--												<span>8 Rating</span>-->
+<!--											</p>-->
+<!--										</div>-->
+<!--										<div class="two">-->
+<!--											<span class="price per-price">$40<br><small>/night</small></span>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<p>For its Salt Desert and Village Life Experience</p>-->
+<!--									<hr>-->
+<!--									<p class="bottom-area d-flex">-->
+<!--										<span><i class="icon-map-o"></i> Kutch </span>-->
+<!--										<span class="ml-auto"><a href="#">Book Now</a></span>-->
+<!--									</p>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+
+<!--						<div class="col-md-4 ftco-animate">-->
+<!--							<div class="destination">-->
+<!--								<a href="hotel-single.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{i.image.url}}');">-->
+<!--									<div class="icon d-flex justify-content-center align-items-center">-->
+<!--										<span class="icon-search2"></span>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--								<div class="text p-3">-->
+<!--									<div class="d-flex">-->
+<!--										<div class="one">-->
+<!--											<h3><a href="hotel-single.html">Hotel, Jaipur</a></h3>-->
+<!--											<p class="rate">-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star"></i>-->
+<!--												<i class="icon-star-o"></i>-->
+<!--												<span>8 Rating</span>-->
+<!--											</p>-->
+<!--										</div>-->
+<!--										<div class="two">-->
+<!--											<span class="price per-price">$40<br><small>/night</small></span>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<p>For rich architecture, food, and shopping also known as the Pink city of India</p>-->
+<!--									<hr>-->
+<!--									<p class="bottom-area d-flex">-->
+<!--										<span><i class="icon-map-o"></i> Jaipur</span>-->
+<!--										<span class="ml-auto"><a href="#">Book Now</a></span>-->
+<!--									</p>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+
+<!--						<div class="col-md-4 ftco-animate">-->
+<!--							<div class="destination">-->
+<!--								<a href="hotel-single.html" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url('{{i.image.url}}');">-->
+<!--									<div class="icon d-flex justify-content-center align-items-center">-->
+<!--										<span class="icon-search2"></span>-->
+<!--									</div>-->
+<!--								</a>-->
+<!--								<div class="text p-3">-->
+<!--									<div class="d-flex">-->
+<!--										<div class="one">-->
+<!--											<h3><a href="hotel-single.html">Hotel, Shimla</a></h3>-->
+<!--											<p class="rate">-->
+<!--				    							<i class="icon-star"></i>-->
+<!--				    							<i class="icon-star"></i>-->
+<!--				    							<i class="icon-star"></i>-->
+<!--				    							<i class="icon-star"></i>-->
+<!--				    							<i class="icon-star-o"></i>-->
+<!--				    							<span>8 Rating</span>-->
+<!--				    						</p>-->
+<!--			    						</div>-->
+<!--										<div class="two">-->
+<!--											<span class="price per-price">$40<br><small>/night</small></span>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<p>Mesmerizing Queen of hills You will witness the beauty of Pine and Oak forests</p>-->
+<!--									<hr>-->
+<!--									<p class="bottom-area d-flex"-->
+<!--									<span><i class="icon-map-o"></i> Shimla</span>-->
+<!--									<span class="ml-auto"><a href="#">Book Now</a></span>-->
+<!--									</p>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</div>-->
+					</div>
+					<div class="row mt-5">
+						<div class="col text-center">
+							<div class="block-27">
+								<ul>
+									<li><a href="#">&lt;</a></li>
+									<li class="active"><span>1</span></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">5</a></li>
+									<li><a href="#">&gt;</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div> <!-- .col-md-8 -->
+			</div>
+		</div>
+	</section> <!-- .section -->
+{% endblock %}

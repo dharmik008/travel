@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Booking</title>
+    <link rel="stylesheet" href="{% static 'hotel_booking.css' %}">
+</head>
+<body>
+<!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/tour/">Tour</a></li>
+            <li><a href="/hotel/">Hotels</a></li>
+            <li><a href="/history/">History</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/contact/">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="hero-wrap" style="background-image: url('{% static 'images/bg_5.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 text-center">
+                    <p class="breadcrumbs"><span><a href="index.html"></a></span> <span></span></p>
+                    <h1 class="mb-3 bread">Hotels</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form method="post" id="paymentForm_1" enctype="multipart/form-data">
+        {% csrf_token %}
+        <br>
+        <h2>Book Your Hotel</h2>
+
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="checkin">Check-In Date:</label>
+        <input type="date" id="checkin" name="checkin" required>
+
+        <label for="checkout">Check-Out Date:</label>
+        <input type="date" id="checkout" name="checkout" required>
+
+        <label for="guests">Number of Guests:</label>
+        <input type="number" id="guests" name="no_guests" min="1" required>
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" value="{{hb.price}}" required>
+
+        <label for="price">Total Price:</label>
+        <input type="number" id="total_price" name="total_price" value="{{hb.price}}" required>
+
+        <label for="message">Special Requests:</label>
+        <textarea id="message" name="message" rows="3" placeholder="Optional"></textarea>
+
+        <button type="submit" id="pay-button_1">Book Now</button>
+    </form>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const paymentForm = document.getElementById('paymentForm_1');
+    const payButton = document.getElementById('pay-button_1');
+
+    payButton.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Get values from form
+        const name = document.querySelector('input[name="name"]').value;
+        const email = document.querySelector('input[name="email"]').value;
+        const checkin = document.querySelector('input[name="checkin"]').value;
+        const checkout = document.querySelector('input[name="checkout"]').value;
+        const message = document.querySelector('textarea[name="message"]').value;
+        const price = document.querySelector('input[name="price"]').value;
+        const total_price = document.querySelector('input[name="total_price"]').value;
+        const no_guests = document.querySelector('input[name="no_guests"]').value;
+
+        // Validate required fields
+        if (!name || !checkin || !checkout || !email || !price || !no_guests || !total_price ) {
+            alert("Please fill all required fields.");
+            return;
+        }
+
+        const totalAmount = parseInt(price) * parseInt(no_guests) * 100;
+
+        // Razorpay payment options
+        const options = {
+            key: "rzp_test_ytoQRUzHn3jtXL", // Replace with your Razorpay test/live key
+            amount: totalAmount,
+            currency: "INR",
+            name: "Your Company Name",
+            description: `Hotel Booking by ${name}`,
+            handler: function (response) {
+                alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+                paymentForm.submit(); // Submit the form after successful payment
+            },
+            prefill: {
+                name: name,
+                email: email
+            },
+            theme: {
+                color: "#3399cc"
+            }
+        };
+
+        // Open Razorpay payment modal
+        const rzp = new Razorpay(options);
+        rzp.open();
+    });
+});
+</script>
+
+</body>
+</html>
