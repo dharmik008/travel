@@ -1,0 +1,191 @@
+/* Styles for the navigation bar (vertical, fixed to the left) - No changes here */
+nav {
+    background-color: #333;
+    width: 200px; /* Adjust width as needed */
+    height: 100vh; /* Make it take the full viewport height */
+    position: fixed; /* Keep it fixed on the side */
+    top: 0;
+    left: 0;
+    padding-top: 20px; /* Add some top padding */
+    text-align: left; /* Align text to the left */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: block; /* Display list items vertically */
+    margin: 10px 0; /* Add vertical spacing */
+    padding: 0 20px; /* Add some horizontal padding */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+    display: block; /* Make the entire link clickable */
+    padding: 10px 0; /* Add padding within the link */
+}
+
+nav ul li a:hover {
+    color: #f0c14b; /* Example hover color */
+    background-color: rgba(255, 255, 255, 0.1); /* Add a subtle background on hover */
+}
+
+/* Adjust the body to accommodate the fixed vertical navbar */
+body {
+    margin-left: 200px; /* Same as the navbar width */
+    padding: 20px; /* Add some padding to the main content */
+    font-family: sans-serif; /* Basic font for the body */
+    line-height: 1.6;
+    color: #444;
+    background-color: #f4f4f4; /* Light background for the page */
+    display: flex; /* Enable flexbox for vertical hero and details */
+    flex-direction: column; /* Stack hero and details vertically */
+    align-items: stretch; /* Make child elements take full width */
+}
+
+/* Styles for the hero section (vertical) */
+.hero-wrap {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    padding: 20px; /* Add padding as needed */
+    height: 600px; /* Set the hero image height to 600px */
+    margin-bottom: 20px; /* Add some space below the hero */
+}
+
+.hero-wrap .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Overlay for text readability */
+}
+
+.hero-wrap .container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.hero-wrap .row {
+    display: flex;
+    flex-direction: column; /* Stack items vertically within the row */
+    align-items: center;  /* Center horizontally within the row */
+    justify-content: center; /* Center vertically within the row */
+    width: 100%;
+}
+
+.hero-wrap .col-md-9 {
+    width: 100%;
+    text-align: center; /* Redundant, but explicit */
+}
+
+.hero-wrap h1.bread {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: white; /* Ensure text is visible on the overlay */
+}
+
+.hero-wrap p.breadcrumbs {
+    font-size: 1em;
+    margin-bottom: 10px;
+    color: white; /* Ensure text is visible on the overlay */
+}
+
+.hero-wrap p.breadcrumbs a {
+    color: white;
+    text-decoration: none;
+}
+
+/* New classes for more specific vertical alignment (optional but recommended) */
+.hero-wrap .vertical-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.hero-wrap .vertical-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.hero-wrap .vertical-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.hero-wrap .vertical-p {
+    margin-bottom: 5px; /* Adjust spacing as needed */
+    color: white; /* Ensure text is visible on the overlay */
+}
+
+.hero-wrap .vertical-h1 {
+    margin-bottom: 15px; /* Adjust spacing as needed */
+    color: white; /* Ensure text is visible on the overlay */
+}
+
+/* Styles for the buttons in the details section */
+.details-side button {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Comfortable padding */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Slightly rounded corners */
+    cursor: pointer; /* Indicate it's clickable */
+    font-size: 1em; /* Standard font size */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+    margin-right: 10px; /* Space between buttons */
+}
+
+.details-side button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.details-side button a {
+    color: white; /* Ensure link text is white */
+    text-decoration: none; /* Remove link underline */
+}
+
+/* Responsive adjustments (if needed) */
+@media (max-width: 768px) {
+    .hero-wrap h1.bread {
+        font-size: 2em;
+    }
+
+    .hero-wrap p.breadcrumbs {
+        font-size: 0.9em;
+    }
+
+    .details-side button {
+        width: 100%; /* Make buttons full width on smaller screens */
+        margin-bottom: 10px; /* Add spacing between stacked buttons */
+        margin-right: 0; /* Remove right margin */
+    }
+}
